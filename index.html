@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>うさぎの自動化日記</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <h1>🐰 うさぎの自動化日記</h1>
+
+  <!-- ステータス -->
+  <div class="status">
+    <p>🌰 コイン: <span id="coin">0</span></p>
+    <p>⚡ 体力: <span id="energy">100</span></p>
+  </div>
+
+  <!-- キャラ -->
+  <div class="character">🐰💨</div>
+
+  <!-- ボタン -->
+  <div class="actions">
+    <button onclick="deliver()">配達する</button>
+    <button onclick="rest()">休む</button>
+    <button onclick="openCode()">コード</button>
+  </div>
+
+  <!-- コード入力 -->
+  <div id="codeArea" class="hidden">
+    <textarea id="codeInput" placeholder="ここにコードを書く..."></textarea>
+    <button onclick="runCode()">実行</button>
+  </div>
+
+  <!-- メッセージ -->
+  <p id="log"></p>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

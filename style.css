@@ -1,0 +1,42 @@
+body {
+  font-family: "Arial";
+  background: #fdf6f0;
+  text-align: center;
+}
+
+.app {
+  padding: 20px;
+}
+
+h1 {
+  color: #ff8fab;
+}
+
+.status {
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.character {
+  font-size: 50px;
+  margin: 20px;
+}
+
+button {
+  padding: 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 20px;
+  background: #ffd6e0;
+  font-size: 16px;
+}
+
+textarea {
+  width: 90%;
+  height: 100px;
+}
+
+.hidden {
+  display: none;
+}
