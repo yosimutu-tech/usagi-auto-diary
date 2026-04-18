@@ -49,3 +49,16 @@ textarea {
   50% { transform: translateY(-8px); }
   100% { transform: translateY(0px); }
 }
+button {
+  background: #ffd6e0;
+  border-radius: 30px;
+  padding: 12px 18px;
+  font-size: 14px;
+  box-shadow: 0 6px 0 #fcb3c2;
+  transition: all 0.1s;
+}
+
+button:active {
+  transform: translateY(3px);
+  box-shadow: 0 3px 0 #fcb3c2;
+}
