@@ -1,6 +1,6 @@
 body {
   font-family: "Arial";
-  background: linear-gradient(#fff0f5, #fde6f0);
+  background: linear-gradient(#ffeef5, #ffd6e0);
   text-align: center;
   margin: 0;
 }
@@ -11,40 +11,35 @@ body {
 
 h1 {
   color: #ff8fab;
-  font-size: 22px;
 }
 
-/* ステータス */
 .status {
-  background: #ffffff;
+  background: white;
   padding: 15px;
-  border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  margin-bottom: 20px;
+  border-radius: 15px;
+  margin: 10px;
 }
 
-/* キャラ */
 .character {
-  font-size: 60px;
-  margin: 20px;
-  animation: float 2s infinite ease-in-out;
+  font-size: 50px;
+  margin: 20px 0;
 }
 
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0px); }
+/* ボタン専用（←ここ重要） */
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
-/* ボタン */
 button {
   background: #ffd6e0;
   border-radius: 30px;
   padding: 12px 18px;
   font-size: 14px;
-  border: none;
-  margin: 5px;
   box-shadow: 0 6px 0 #fcb3c2;
+  transition: all 0.1s;
 }
 
 button:active {
@@ -52,30 +47,6 @@ button:active {
   box-shadow: 0 3px 0 #fcb3c2;
 }
 
-/* メッセージ */
-#log {
-  margin-top: 15px;
-}
-
-/* コード欄 */
 .hidden {
   display: none;
-}
-
-textarea {
-  width: 90%;
-  margin-top: 10px;
-  border-radius: 10px;
-  padding: 10px;
-}
-/* ボタンを折り返す */
-div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-/* ボタンの間隔 */
-button {
-  margin: 5px;
 }
