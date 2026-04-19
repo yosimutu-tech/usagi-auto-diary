@@ -5,6 +5,7 @@
   <title>うさぎの自動化日記</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="app">
@@ -13,9 +14,9 @@
 
   <!-- ステータス -->
   <div class="status">
-    <p>🌰 コイン: <span id="coin">0</span></p>
-    <p>🐰 レベル: <span id="level">1</span></p>
-    <p>⚡ 体力: <span id="energy">100</span></p>
+    <p>🌰 コイン：<span id="coin">0</span></p>
+    <p>🐰 レベル：<span id="level">1</span></p>
+    <p>⚡ 体力：<span id="energy">100</span></p>
   </div>
 
   <!-- キャラ -->
@@ -34,11 +35,12 @@
 
   <!-- コード表示 -->
   <div id="codeArea" class="hidden">
-    <textarea rows="6">ここにコード表示エリア</textarea>
+    <textarea oninput="saveCode()">ここにコード表示エリア</textarea>
   </div>
 
 </div>
 
 <script src="app.js"></script>
+
 </body>
 </html>
