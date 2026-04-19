@@ -53,7 +53,7 @@ function gacha() {
 
   const logEl = document.getElementById("log");
   const character = document.querySelector(".character");
-
+  const character = document.getElementById("character");
   // ガチャ中
   logEl.textContent = "🎰 ガチャ中…";
   logEl.style.color = "#ff69b4";
