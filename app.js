@@ -1,6 +1,7 @@
 let coin = 0;
 let energy = 100;
 let level = 1;
+let power = 1; // ★追加（ガチャ強化）
 
 // レベル計算
 function updateLevel() {
@@ -35,7 +36,7 @@ function deliver() {
     return;
   }
 
-  coin += 50;
+  coin += 50 * power; // ★強化
   energy -= 10;
 
   log("配達したよ！");
@@ -49,6 +50,33 @@ function rest() {
   if (energy > 100) energy = 100;
 
   log("休んだよ");
+  updateUI();
+  saveGame();
+}
+
+// 🎰 ガチャ（強化版）
+function gacha() {
+  if (coin < 100) {
+    log("コインが足りないよ…");
+    return;
+  }
+
+  coin -= 100;
+
+  const rand = Math.random();
+  let result = "";
+
+  if (rand < 0.6) {
+    result = "🐰ノーマル";
+  } else if (rand < 0.9) {
+    result = "🐰✨レア！パワー+1";
+    power += 1;
+  } else {
+    result = "👑🐰超レア！！パワー+3";
+    power += 3;
+  }
+
+  log("ガチャ結果：" + result);
   updateUI();
   saveGame();
 }
@@ -67,15 +95,18 @@ function openCode() {
 function saveGame() {
   localStorage.setItem("coin", coin);
   localStorage.setItem("energy", energy);
+  localStorage.setItem("power", power); // ★追加
 }
 
 // 読み込み
 function loadGame() {
   const savedCoin = localStorage.getItem("coin");
   const savedEnergy = localStorage.getItem("energy");
+  const savedPower = localStorage.getItem("power");
 
   if (savedCoin !== null) coin = parseInt(savedCoin);
   if (savedEnergy !== null) energy = parseInt(savedEnergy);
+  if (savedPower !== null) power = parseInt(savedPower);
 
   updateUI();
 }
@@ -83,40 +114,9 @@ function loadGame() {
 // 初期化
 loadGame();
 
-// 🔥 放置収益
+// 🔥 放置収益（強化版）
 setInterval(() => {
-  coin += level * 5;
+  coin += level * power * 5; // ★ここ重要
   updateUI();
   saveGame();
 }, 3000);
-// 🎰 ガチャ
-function gacha() {
-  if (coin < 100) {
-    log("コインが足りないよ…");
-    return;
-  }
-
-  coin -= 100;
-
-  const rand = Math.random();
-
-  let result = "";
-  let bonus = 0;
-
-  if (rand < 0.6) {
-    result = "🐰ノーマル";
-    bonus = 0;
-  } else if (rand < 0.9) {
-    result = "🐰✨レア！";
-    bonus = 50;
-  } else {
-    result = "👑🐰超レア！！";
-    bonus = 200;
-  }
-
-  coin += bonus;
-
-  log("ガチャ結果：" + result + " +" + bonus + "コイン");
-  updateUI();
-  saveGame();
-}
