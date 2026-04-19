@@ -41,7 +41,7 @@ function rest() {
   saveGame();
 }
 
-// 🎰 ガチャ（演出つき）
+// 🎰 ガチャ（キャラ変化つき）
 function gacha() {
   if (coin < 100) {
     log("コインが足りない！");
@@ -51,29 +51,32 @@ function gacha() {
   coin -= 100;
   updateUI();
 
-  // ガチャ中演出
   const logEl = document.getElementById("log");
+  const character = document.querySelector(".character");
+
+  // ガチャ中
   logEl.textContent = "🎰 ガチャ中…";
   logEl.style.color = "#ff69b4";
   logEl.style.fontSize = "18px";
 
-  // 1秒後に結果
   setTimeout(() => {
     const rand = Math.random();
-
     let result = "";
+
     if (rand < 0.6) {
       result = "🍪 おやつ！(+20体力)";
       energy += 20;
+      character.textContent = "🐰";
     } else if (rand < 0.9) {
       result = "💰 コイン！(+200)";
       coin += 200;
+      character.textContent = "🐰✨";
     } else {
-      result = "✨ レア！体力MAX！";
-      energy = 100;
+      result = "👑 超レア！！ +500コイン";
+      coin += 500;
+      character.textContent = "🐰🔥✨";
     }
 
-    // 結果表示
     logEl.textContent = "🐰 " + result;
     logEl.style.color = "#ff1493";
     logEl.style.fontSize = "20px";
