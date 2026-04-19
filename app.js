@@ -2,14 +2,26 @@ let coin = 0;
 let energy = 100;
 let level = 1;
 
-// レベル計算（コインから自動計算）
+// レベル計算
 function updateLevel() {
   level = Math.floor(coin / 500) + 1;
+}
+
+// 🐰 キャラ進化
+function updateCharacter() {
+  let char = "🐰";
+
+  if (level >= 5) char = "👑🐰";
+  else if (level >= 3) char = "🐰✨";
+  else if (level >= 2) char = "🐰💨";
+
+  document.getElementById("character").textContent = char;
 }
 
 // 画面更新
 function updateUI() {
   updateLevel();
+  updateCharacter();
 
   document.getElementById("coin").textContent = coin;
   document.getElementById("energy").textContent = energy;
@@ -46,13 +58,18 @@ function log(message) {
   document.getElementById("log").textContent = "🐰 " + message;
 }
 
-// 保存（※レベルは保存しない）
+// コード表示
+function openCode() {
+  document.getElementById("codeArea").classList.toggle("hidden");
+}
+
+// 保存
 function saveGame() {
   localStorage.setItem("coin", coin);
   localStorage.setItem("energy", energy);
 }
 
-// 読み込み（※レベルは読み込まない）
+// 読み込み
 function loadGame() {
   const savedCoin = localStorage.getItem("coin");
   const savedEnergy = localStorage.getItem("energy");
@@ -66,7 +83,7 @@ function loadGame() {
 // 初期化
 loadGame();
 
-// 🔥 放置収益（3秒ごとに増える）
+// 🔥 放置収益
 setInterval(() => {
   coin += level * 5;
   updateUI();
