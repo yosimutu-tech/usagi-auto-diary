@@ -1,28 +1,15 @@
 let coin = 0;
 let energy = 100;
 let level = 1;
-let power = 1; // ★追加（ガチャ強化）
 
 // レベル計算
 function updateLevel() {
   level = Math.floor(coin / 500) + 1;
 }
 
-// 🐰 キャラ進化
-function updateCharacter() {
-  let char = "🐰";
-
-  if (level >= 5) char = "👑🐰";
-  else if (level >= 3) char = "🐰✨";
-  else if (level >= 2) char = "🐰💨";
-
-  document.getElementById("character").textContent = char;
-}
-
 // 画面更新
 function updateUI() {
   updateLevel();
-  updateCharacter();
 
   document.getElementById("coin").textContent = coin;
   document.getElementById("energy").textContent = energy;
@@ -36,7 +23,7 @@ function deliver() {
     return;
   }
 
-  coin += 50 * power; // ★強化
+  coin += 50;
   energy -= 10;
 
   log("配達したよ！");
@@ -54,31 +41,53 @@ function rest() {
   saveGame();
 }
 
-// 🎰 ガチャ（強化版）
+// 🎰 ガチャ（演出つき）
 function gacha() {
   if (coin < 100) {
-    log("コインが足りないよ…");
+    log("コインが足りない！");
     return;
   }
 
   coin -= 100;
-
-  const rand = Math.random();
-  let result = "";
-
-  if (rand < 0.6) {
-    result = "🐰ノーマル";
-  } else if (rand < 0.9) {
-    result = "🐰✨レア！パワー+1";
-    power += 1;
-  } else {
-    result = "👑🐰超レア！！パワー+3";
-    power += 3;
-  }
-
-  log("ガチャ結果：" + result);
   updateUI();
-  saveGame();
+
+  // ガチャ中演出
+  const logEl = document.getElementById("log");
+  logEl.textContent = "🎰 ガチャ中…";
+  logEl.style.color = "#ff69b4";
+  logEl.style.fontSize = "18px";
+
+  // 1秒後に結果
+  setTimeout(() => {
+    const rand = Math.random();
+
+    let result = "";
+    if (rand < 0.6) {
+      result = "🍪 おやつ！(+20体力)";
+      energy += 20;
+    } else if (rand < 0.9) {
+      result = "💰 コイン！(+200)";
+      coin += 200;
+    } else {
+      result = "✨ レア！体力MAX！";
+      energy = 100;
+    }
+
+    // 結果表示
+    logEl.textContent = "🐰 " + result;
+    logEl.style.color = "#ff1493";
+    logEl.style.fontSize = "20px";
+
+    updateUI();
+    saveGame();
+
+    // 元に戻す
+    setTimeout(() => {
+      logEl.style.color = "#333";
+      logEl.style.fontSize = "16px";
+    }, 1500);
+
+  }, 1000);
 }
 
 // メッセージ
@@ -86,37 +95,25 @@ function log(message) {
   document.getElementById("log").textContent = "🐰 " + message;
 }
 
-// コード表示
-function openCode() {
-  document.getElementById("codeArea").classList.toggle("hidden");
-}
-
 // 保存
 function saveGame() {
   localStorage.setItem("coin", coin);
   localStorage.setItem("energy", energy);
-  localStorage.setItem("power", power); // ★追加
+  localStorage.setItem("level", level);
 }
 
 // 読み込み
 function loadGame() {
   const savedCoin = localStorage.getItem("coin");
   const savedEnergy = localStorage.getItem("energy");
-  const savedPower = localStorage.getItem("power");
+  const savedLevel = localStorage.getItem("level");
 
   if (savedCoin !== null) coin = parseInt(savedCoin);
   if (savedEnergy !== null) energy = parseInt(savedEnergy);
-  if (savedPower !== null) power = parseInt(savedPower);
+  if (savedLevel !== null) level = parseInt(savedLevel);
 
   updateUI();
 }
 
 // 初期化
 loadGame();
-
-// 🔥 放置収益（強化版）
-setInterval(() => {
-  coin += level * power * 5; // ★ここ重要
-  updateUI();
-  saveGame();
-}, 3000);
