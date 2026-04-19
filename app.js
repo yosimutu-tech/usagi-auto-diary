@@ -17,6 +17,7 @@ function deliver(amount = 1) {
   }
   log("📦 配達したよ！");
   updateUI();
+  saveGame(); // ←これだけ追加
 }
 
 function rest() {
@@ -24,6 +25,7 @@ function rest() {
   if (energy > 100) energy = 100;
   log("💤 休んだよ");
   updateUI();
+  saveGame(); // ←これだけ追加
 }
 
 function openCode() {
@@ -56,3 +58,41 @@ function log(message) {
 }
 
 updateUI();
+// 保存
+function saveGame() {
+  localStorage.setItem("coin", coin);
+  localStorage.setItem("energy", energy);
+}
+
+// 読み込み
+function loadGame() {
+  const savedCoin = localStorage.getItem("coin");
+  const savedEnergy = localStorage.getItem("energy");
+
+  if (savedCoin !== null) coin = parseInt(savedCoin);
+  if (savedEnergy !== null) energy = parseInt(savedEnergy);
+
+  updateUI();
+}
+// 上の方（もともとあるコード）
+let coin = 0;
+let energy = 100;
+
+function updateUI() { ... }
+
+function deliver() {
+  ...
+  saveGame(); // ←追加
+}
+
+function rest() {
+  ...
+  saveGame(); // ←追加
+}
+
+// ▼ここに追加（どこでもOKだけど下が分かりやすい）
+function saveGame() { ... }
+function loadGame() { ... }
+
+// ▼これが一番下
+loadGame();
