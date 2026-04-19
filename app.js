@@ -89,3 +89,34 @@ setInterval(() => {
   updateUI();
   saveGame();
 }, 3000);
+// 🎰 ガチャ
+function gacha() {
+  if (coin < 100) {
+    log("コインが足りないよ…");
+    return;
+  }
+
+  coin -= 100;
+
+  const rand = Math.random();
+
+  let result = "";
+  let bonus = 0;
+
+  if (rand < 0.6) {
+    result = "🐰ノーマル";
+    bonus = 0;
+  } else if (rand < 0.9) {
+    result = "🐰✨レア！";
+    bonus = 50;
+  } else {
+    result = "👑🐰超レア！！";
+    bonus = 200;
+  }
+
+  coin += bonus;
+
+  log("ガチャ結果：" + result + " +" + bonus + "コイン");
+  updateUI();
+  saveGame();
+}
