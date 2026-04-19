@@ -2,10 +2,14 @@ let coin = 0;
 let energy = 100;
 let level = 1;
 
+const character = document.getElementById("character");
+
+// レベル計算
 function updateLevel() {
   level = Math.floor(coin / 500) + 1;
 }
 
+// 画面更新
 function updateUI() {
   updateLevel();
 
@@ -14,6 +18,7 @@ function updateUI() {
   document.getElementById("level").textContent = level;
 }
 
+// 配達
 function deliver() {
   if (energy <= 0) {
     log("つかれて寝ちゃった…");
@@ -23,20 +28,34 @@ function deliver() {
   coin += 50;
   energy -= 10;
 
+  character.textContent = "🐰💨";
+
+  setTimeout(() => {
+    character.textContent = "🐰";
+  }, 500);
+
   log("配達したよ！");
   updateUI();
   saveGame();
 }
 
+// 休む
 function rest() {
   energy += 20;
   if (energy > 100) energy = 100;
+
+  character.textContent = "🐰💤";
+
+  setTimeout(() => {
+    character.textContent = "🐰";
+  }, 500);
 
   log("休んだよ");
   updateUI();
   saveGame();
 }
 
+// ガチャ
 function gacha() {
   if (coin < 100) {
     log("コインが足りない！");
@@ -44,48 +63,48 @@ function gacha() {
   }
 
   coin -= 100;
-  updateUI();
 
-  const logEl = document.getElementById("log");
-  const character = document.getElementById("character"); // ←ここ重要
+  const rand = Math.random();
 
-  logEl.textContent = "🎰 ガチャ中…";
+  if (rand < 0.05) {
+    coin += 200;
+    character.textContent = "🐰✨✨";
+    log("🎉超レア！！ +200コイン");
+  } else if (rand < 0.3) {
+    coin += 100;
+    character.textContent = "🐰✨";
+    log("レア！ +100コイン");
+  } else {
+    character.textContent = "🐰💦";
+    log("ノーマル…");
+  }
 
   setTimeout(() => {
-    const rand = Math.random();
-    let result = "";
+    character.textContent = "🐰";
+  }, 800);
 
-    if (rand < 0.6) {
-      result = "🍪 おやつ！(+20体力)";
-      energy += 20;
-      character.textContent = "🐰";
-    } else if (rand < 0.9) {
-      result = "💰 コイン！(+200)";
-      coin += 200;
-      character.textContent = "🐰✨";
-    } else {
-      result = "👑 超レア！！ +500コイン";
-      coin += 500;
-      character.textContent = "🐰🔥✨";
-    }
-
-    logEl.textContent = "🐰 " + result;
-
-    updateUI();
-    saveGame();
-  }, 1000);
+  updateUI();
+  saveGame();
 }
 
+// コード表示
+function openCode() {
+  document.getElementById("codeArea").classList.toggle("hidden");
+}
+
+// メッセージ
 function log(message) {
   document.getElementById("log").textContent = "🐰 " + message;
 }
 
+// 保存
 function saveGame() {
   localStorage.setItem("coin", coin);
   localStorage.setItem("energy", energy);
   localStorage.setItem("level", level);
 }
 
+// 読み込み
 function loadGame() {
   const savedCoin = localStorage.getItem("coin");
   const savedEnergy = localStorage.getItem("energy");
@@ -98,4 +117,5 @@ function loadGame() {
   updateUI();
 }
 
+// 初期化
 loadGame();
