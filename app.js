@@ -2,12 +2,10 @@ let coin = 0;
 let energy = 100;
 let level = 1;
 
-// レベル計算
 function updateLevel() {
   level = Math.floor(coin / 500) + 1;
 }
 
-// 画面更新
 function updateUI() {
   updateLevel();
 
@@ -16,7 +14,6 @@ function updateUI() {
   document.getElementById("level").textContent = level;
 }
 
-// 配達
 function deliver() {
   if (energy <= 0) {
     log("つかれて寝ちゃった…");
@@ -31,7 +28,6 @@ function deliver() {
   saveGame();
 }
 
-// 休む
 function rest() {
   energy += 20;
   if (energy > 100) energy = 100;
@@ -41,7 +37,6 @@ function rest() {
   saveGame();
 }
 
-// 🎰 ガチャ（キャラ変化つき）
 function gacha() {
   if (coin < 100) {
     log("コインが足りない！");
@@ -52,12 +47,9 @@ function gacha() {
   updateUI();
 
   const logEl = document.getElementById("log");
-  const character = document.querySelector(".character");
-  const character = document.getElementById("character");
-  // ガチャ中
+  const character = document.getElementById("character"); // ←ここ重要
+
   logEl.textContent = "🎰 ガチャ中…";
-  logEl.style.color = "#ff69b4";
-  logEl.style.fontSize = "18px";
 
   setTimeout(() => {
     const rand = Math.random();
@@ -78,34 +70,22 @@ function gacha() {
     }
 
     logEl.textContent = "🐰 " + result;
-    logEl.style.color = "#ff1493";
-    logEl.style.fontSize = "20px";
 
     updateUI();
     saveGame();
-
-    // 元に戻す
-    setTimeout(() => {
-      logEl.style.color = "#333";
-      logEl.style.fontSize = "16px";
-    }, 1500);
-
   }, 1000);
 }
 
-// メッセージ
 function log(message) {
   document.getElementById("log").textContent = "🐰 " + message;
 }
 
-// 保存
 function saveGame() {
   localStorage.setItem("coin", coin);
   localStorage.setItem("energy", energy);
   localStorage.setItem("level", level);
 }
 
-// 読み込み
 function loadGame() {
   const savedCoin = localStorage.getItem("coin");
   const savedEnergy = localStorage.getItem("energy");
@@ -118,5 +98,4 @@ function loadGame() {
   updateUI();
 }
 
-// 初期化
 loadGame();
