@@ -68,3 +68,14 @@ textarea {
   border-radius: 10px;
   padding: 10px;
 }
+/* ボタンを折り返す */
+div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ボタンの間隔 */
+button {
+  margin: 5px;
+}
