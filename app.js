@@ -50,23 +50,18 @@ function log(message) {
 function saveGame() {
   localStorage.setItem("coin", coin);
   localStorage.setItem("energy", energy);
-  localStorage.setItem("level", level);
 }
 
 // 読み込み
 function loadGame() {
   const savedCoin = localStorage.getItem("coin");
   const savedEnergy = localStorage.getItem("energy");
-  const savedLevel = localStorage.getItem("level");
 
   if (savedCoin !== null) coin = parseInt(savedCoin);
   if (savedEnergy !== null) energy = parseInt(savedEnergy);
-  if (savedLevel !== null) level = parseInt(savedLevel);
 
   updateUI();
 }
 
 // 初期化
 loadGame();
-
-// test
