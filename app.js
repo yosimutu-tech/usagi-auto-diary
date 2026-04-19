@@ -54,4 +54,7 @@ function loadGame() {
 }
 
 // 初期化
+function updateLevel() {
+  level = Math.floor(coin / 500) + 1;
+}
 loadGame();
