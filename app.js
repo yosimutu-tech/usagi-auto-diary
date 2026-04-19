@@ -49,6 +49,7 @@ function gacha() {
   }
 
   coin -= 100;
+ animateCharacter();  
 
   const rand = Math.random();
 
