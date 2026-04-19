@@ -50,3 +50,11 @@ button:active {
 .hidden {
   display: none;
 }
+
+textarea {
+  width: 90%;
+  height: 150px;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 14px;
+}
