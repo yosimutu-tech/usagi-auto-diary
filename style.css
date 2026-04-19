@@ -1,7 +1,8 @@
 body {
   font-family: "Arial";
-  background: #fdf6f0;
+  background: linear-gradient(#fff0f5, #fde6f0);
   text-align: center;
+  margin: 0;
 }
 
 .app {
@@ -10,37 +11,22 @@ body {
 
 h1 {
   color: #ff8fab;
+  font-size: 22px;
 }
 
+/* ステータス */
 .status {
-  background: #fff;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.character {
-  font-size: 50px;
-  margin: 20px;
-}
-
-button {
+  background: #ffffff;
   padding: 15px;
-  margin: 5px;
-  border: none;
   border-radius: 20px;
-  background: #ffd6e0;
-  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
 }
 
-textarea {
-  width: 90%;
-  height: 100px;
-}
-
-.hidden {
-  display: none;
-}
+/* キャラ */
 .character {
+  font-size: 60px;
+  margin: 20px;
   animation: float 2s infinite ease-in-out;
 }
 
@@ -49,16 +35,24 @@ textarea {
   50% { transform: translateY(-8px); }
   100% { transform: translateY(0px); }
 }
+
+/* ボタン */
 button {
   background: #ffd6e0;
   border-radius: 30px;
   padding: 12px 18px;
   font-size: 14px;
+  border: none;
+  margin: 5px;
   box-shadow: 0 6px 0 #fcb3c2;
-  transition: all 0.1s;
 }
 
 button:active {
   transform: translateY(3px);
   box-shadow: 0 3px 0 #fcb3c2;
+}
+
+/* メッセージ */
+#log {
+  margin-top: 15px;
 }
