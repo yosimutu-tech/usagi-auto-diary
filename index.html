@@ -19,16 +19,22 @@
   </div>
 
   <!-- キャラ -->
-  <div class="character">🐰💨</div>
+  <div id="character" class="character">🐰</div>
 
   <!-- ボタン -->
   <div>
     <button onclick="deliver()">配達する</button>
     <button onclick="rest()">休む</button>
+    <button onclick="openCode()">コード</button>
   </div>
 
   <!-- メッセージ -->
   <p id="log"></p>
+
+  <!-- コード表示 -->
+  <div id="codeArea" class="hidden">
+    <textarea rows="6">ここにコード表示エリア</textarea>
+  </div>
 
 </div>
 
