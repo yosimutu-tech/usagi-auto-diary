@@ -108,3 +108,13 @@ function loadCode() {
 // 初期化
 loadGame();
 loadCode();
+
+// 👇ここから追加（この位置が安全）
+const character = document.getElementById("character");
+
+function animateCharacter() {
+  character.style.transform = "scale(1.5)";
+  setTimeout(() => {
+    character.style.transform = "scale(1)";
+  }, 300);
+}
