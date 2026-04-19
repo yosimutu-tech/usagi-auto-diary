@@ -1,5 +1,5 @@
 body {
-  font-family: "Arial";
+  font-family: Arial;
   background: linear-gradient(#ffeef5, #ffd6e0);
   text-align: center;
   margin: 0;
@@ -23,9 +23,9 @@ h1 {
 .character {
   font-size: 50px;
   margin: 20px 0;
+  transition: 0.2s;
 }
 
-/* ボタン専用（←ここ重要） */
 .buttons {
   display: flex;
   flex-wrap: wrap;
@@ -38,8 +38,8 @@ button {
   border-radius: 30px;
   padding: 12px 18px;
   font-size: 14px;
+  border: none;
   box-shadow: 0 6px 0 #fcb3c2;
-  transition: all 0.1s;
 }
 
 button:active {
@@ -52,12 +52,10 @@ button:active {
 }
 
 textarea {
-  width: 95%;
-  max-width: 500px;
-  height: 180px;
-  display: block;
-  margin: 20px auto;
+  width: 90%;
+  height: 150px;
   border-radius: 10px;
   padding: 10px;
   font-size: 14px;
+  margin-top: 10px;
 }
