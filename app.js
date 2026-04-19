@@ -2,8 +2,6 @@ let coin = 0;
 let energy = 100;
 let level = 1;
 
-const character = document.getElementById("character");
-
 // レベル計算
 function updateLevel() {
   level = Math.floor(coin / 500) + 1;
@@ -28,12 +26,6 @@ function deliver() {
   coin += 50;
   energy -= 10;
 
-  character.textContent = "🐰💨";
-
-  setTimeout(() => {
-    character.textContent = "🐰";
-  }, 500);
-
   log("配達したよ！");
   updateUI();
   saveGame();
@@ -43,12 +35,6 @@ function deliver() {
 function rest() {
   energy += 20;
   if (energy > 100) energy = 100;
-
-  character.textContent = "🐰💤";
-
-  setTimeout(() => {
-    character.textContent = "🐰";
-  }, 500);
 
   log("休んだよ");
   updateUI();
@@ -66,30 +52,19 @@ function gacha() {
 
   const rand = Math.random();
 
-  if (rand < 0.05) {
-    coin += 200;
-    character.textContent = "🐰✨✨";
-    log("🎉超レア！！ +200コイン");
-  } else if (rand < 0.3) {
+  if (rand < 0.6) {
     coin += 100;
-    character.textContent = "🐰✨";
-    log("レア！ +100コイン");
+    log("ノーマル！+100コイン");
+  } else if (rand < 0.9) {
+    coin += 150;
+    log("レア！+150コイン");
   } else {
-    character.textContent = "🐰💦";
-    log("ノーマル…");
+    coin += 300;
+    log("超レア！！+300コイン");
   }
-
-  setTimeout(() => {
-    character.textContent = "🐰";
-  }, 800);
 
   updateUI();
   saveGame();
-}
-
-// コード表示
-function openCode() {
-  document.getElementById("codeArea").classList.toggle("hidden");
 }
 
 // メッセージ
@@ -117,5 +92,19 @@ function loadGame() {
   updateUI();
 }
 
+// ⭐コード保存
+function saveCode() {
+  const code = document.querySelector("textarea").value;
+  localStorage.setItem("userCode", code);
+}
+
+function loadCode() {
+  const saved = localStorage.getItem("userCode");
+  if (saved) {
+    document.querySelector("textarea").value = saved;
+  }
+}
+
 // 初期化
 loadGame();
+loadCode();
