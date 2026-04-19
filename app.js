@@ -6,15 +6,14 @@ function updateUI() {
   document.getElementById("energy").textContent = energy;
 }
 
-function deliver(amount = 1) {
-  for (let i = 0; i < amount; i++) {
-    if (energy <= 0) {
-      log("つかれて寝ちゃった…");
-      return;
-    }
-    coin += 50;
-    energy -= 10;
+function deliver() {
+  if (energy <= 0) {
+    log("つかれて寝ちゃった…");
+    return;
   }
+  coin += 50;
+  energy -= 10;
+
   log("配達したよ！");
   updateUI();
   saveGame();
@@ -23,6 +22,7 @@ function deliver(amount = 1) {
 function rest() {
   energy += 20;
   if (energy > 100) energy = 100;
+
   log("休んだよ");
   updateUI();
   saveGame();
@@ -30,24 +30,6 @@ function rest() {
 
 function openCode() {
   document.getElementById("codeArea").classList.toggle("hidden");
-}
-
-function runCode() {
-  let code = document.getElementById("codeInput").value;
-
-  try {
-    code = code
-      .replace(/for\s+\w+\s+in\s+range\((\d+)\):/g, "for(let i=0;i<$1;i++){")
-      .replace(/\n/g, ";")
-      .replace(/:/g, "{") + "}";
-
-    eval(code);
-    log("うまくできたよ！");
-  } catch (e) {
-    log("ちょっとむずかしかったみたい…");
-  }
-
-  updateUI();
 }
 
 function log(message) {
@@ -71,5 +53,5 @@ function loadGame() {
   updateUI();
 }
 
-// 初期表示
+// 初期化
 loadGame();
