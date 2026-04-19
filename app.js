@@ -2,6 +2,9 @@ let coin = 0;
 let energy = 100;
 let level = 1;
 
+// キャラ取得
+const character = document.getElementById("character");
+
 // レベル計算
 function updateLevel() {
   level = Math.floor(coin / 500) + 1;
@@ -49,7 +52,8 @@ function gacha() {
   }
 
   coin -= 100;
- animateCharacter();  
+
+  animateCharacter(); // ←演出
 
   const rand = Math.random();
 
@@ -66,6 +70,20 @@ function gacha() {
 
   updateUI();
   saveGame();
+}
+
+// ⭐キャラアニメーション
+function animateCharacter() {
+  character.style.transform = "scale(1.5)";
+  setTimeout(() => {
+    character.style.transform = "scale(1)";
+  }, 300);
+}
+
+// コード表示切替
+function openCode() {
+  const area = document.getElementById("codeArea");
+  area.classList.toggle("hidden");
 }
 
 // メッセージ
@@ -93,7 +111,7 @@ function loadGame() {
   updateUI();
 }
 
-// ⭐コード保存
+// コード保存
 function saveCode() {
   const code = document.querySelector("textarea").value;
   localStorage.setItem("userCode", code);
@@ -106,16 +124,12 @@ function loadCode() {
   }
 }
 
+// 放置ゲーム（自動収入）
+setInterval(() => {
+  coin += level * 10;
+  updateUI();
+}, 5000);
+
 // 初期化
 loadGame();
 loadCode();
-
-// 👇ここから追加（この位置が安全）
-const character = document.getElementById("character");
-
-function animateCharacter() {
-  character.style.transform = "scale(1.5)";
-  setTimeout(() => {
-    character.style.transform = "scale(1)";
-  }, 300);
-}
