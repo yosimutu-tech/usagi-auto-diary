@@ -1,6 +1,6 @@
 let coin = 0;
 let energy = 100;
-
+let level = 1;
 function updateUI() {
   document.getElementById("coin").textContent = coin;
   document.getElementById("energy").textContent = energy;
