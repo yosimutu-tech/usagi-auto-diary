@@ -56,3 +56,15 @@ button:active {
 #log {
   margin-top: 15px;
 }
+
+/* コード欄 */
+.hidden {
+  display: none;
+}
+
+textarea {
+  width: 90%;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 10px;
+}
